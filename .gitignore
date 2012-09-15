@@ -12,4 +12,12 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
-/tmp
+/tmp/*
+tmp/**/*
+doc/api
+doc/app
+db/*.sqlite3
+*.swp
+*~
+.DS_Store
+
