@@ -1,0 +1,9 @@
+<%= form_for(@micropost) do |f| %>
+	<%= render 'shared/error_messages', object: f.object %>
+	<div class="field">
+		<%= f.text_area :content, placeholder: "Compose new micropost...", onFocus: "countChars('textbox','char_count',140)", onKeyDown: "countChars('textbox','char_count',140)", onKeyUp: "countChars('textbox','char_count',140)", id: "textbox" %>
+	</div>
+	<%= javascript_include_tag "count-chars" %>
+	<span id="char_count"></span>
+	<%= f.submit "Post", class: "btn btn-large btn-primary" %>
+<% end %>
