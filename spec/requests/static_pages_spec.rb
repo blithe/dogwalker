@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "StaticPages" do
-  let(:base_title) { "Ruby on Rails Tutorial Sample App" }
+  let(:base_title) { "Dogwalker App" }
   subject { page }
   
    shared_examples_for "all static pages" do
@@ -11,7 +11,7 @@ describe "StaticPages" do
 
   describe "Home page" do
   	before { visit root_path}
-    let(:heading)		{ 'Sample App' }
+    let(:heading)		{ 'Dogwalker App' }
     let(:page_title)	{ '' }
 
     it_should_behave_like "all static pages"
@@ -92,16 +92,11 @@ describe "StaticPages" do
 
   it "should have the right links on the layout" do
   	visit root_path
-  	click_link "About"
-  	page.should have_selector 'title', text: full_title('About Us')
-  	click_link "Help"
-  	page.should have_selector 'title', text: full_title('Help')
-  	click_link "Contact"
-  	page.should have_selector 'title', text: full_title('Contact')
+  	
   	click_link "Home"
   	click_link "Sign up now!"
   	page.should have_selector 'title', text: full_title('Sign up')
-  	click_link "sample app"
+  	click_link "dogwalker app"
   	page.should have_selector 'title', text: full_title('')
   end
 end
