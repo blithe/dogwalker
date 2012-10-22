@@ -47,7 +47,10 @@ describe User do
   it { should respond_to(:reverse_relationships) }
   it { should respond_to(:followers) }
   it { should respond_to(:following?) }
-  it { should respond_to(:follow!) }
+  it { should respond_to(:street) }
+  it { should respond_to(:city) }
+  it { should respond_to(:state) }
+  it { should respond_to(:zipcode) }
 
   it { should be_valid }
 
