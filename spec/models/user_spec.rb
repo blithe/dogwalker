@@ -13,7 +13,10 @@ require 'spec_helper'
 
 describe User do
   before do
-  	@user = User.new(name: "Example User", email: "user@example.com", password: "foobar", password_confirmation: "foobar")
+  	@user = User.new(name: "Example User", email: "user@example.com", 
+                      password: "foobar", password_confirmation: "foobar",
+                      street: "1 Infinite Loop", city: "Cupertnio", 
+                      state: "CA", zipcode: "90210")
   end
   subject { @user }
 
