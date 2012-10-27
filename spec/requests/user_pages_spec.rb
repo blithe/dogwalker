@@ -110,6 +110,8 @@ describe "User pages" do
     let(:user) { FactoryGirl.create(:user) }
     let!(:m1) { FactoryGirl.create(:micropost, user: user, content: "Foo") }
     let!(:m2) { FactoryGirl.create(:micropost, user: user, content: "Bar") }
+    let!(:d1) { FactoryGirl.create(:dog, user: user, name: "Nola") }
+    let!(:d2) { FactoryGirl.create(:dog, user: user, name: "Snoopy") }
 
     before do
       sign_in user
@@ -119,35 +121,9 @@ describe "User pages" do
     it { should have_selector('h1', text: user.name) }
     it { should have_selector('title', text: user.name) }
     
-    describe "should have micropost pagination" do
-      before(:all) { 31.times { FactoryGirl.create(:micropost, user: user) } }
-      after(:all) { user.microposts.delete_all }
-      it { should have_selector('div.pagination') }
-    end
-
-    describe "should have microposts" do
-      it { should have_content(m1.content) }
-      it { should have_content(m2.content) }
-      it { should have_content(user.microposts.count) }
-    end
-
-    describe "micropost delete links" do
-      let(:other_user) { FactoryGirl.create(:user) }
-      let!(:m3) { FactoryGirl.create(:micropost, user: other_user, content: "Foo") }    
-      
-      it "should exist for current user" do
-        visit user_path(user)
-        user.microposts.each do |item|
-          find("li##{item.id}").should have_link('delete')
-        end
-      end
-
-      it "should not exist for other user" do
-        visit user_path(other_user)
-        other_user.microposts.each do |item|
-          find("li##{item.id}").should_not have_link('delete')
-        end
-      end
+    describe "should have dogs" do
+      it { should have_content(d1.name) }
+      it { should have_content(d2.name) }
     end
 
     describe "should have follower/following counts" do

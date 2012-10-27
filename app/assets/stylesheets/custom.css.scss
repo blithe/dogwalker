@@ -244,3 +244,26 @@ aside {
     margin-bottom: 5px;
   }
 }
+
+/* dogs */
+
+.dogs {
+  list-style: none;
+  margin: 10px 0 0 0;
+
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+}
+
+.name {
+  display: block;
+}
+
+aside {
+  textarea {
+    height: 40px;
+    margin-bottom: 5px;
+  }
+}

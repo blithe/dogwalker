@@ -54,6 +54,7 @@ describe User do
   it { should respond_to(:city) }
   it { should respond_to(:state) }
   it { should respond_to(:zipcode) }
+  it { should respond_to(:dogs) }
 
   it { should be_valid }
 
@@ -194,6 +195,25 @@ describe User do
         followed_user.microposts.each do |micropost|
           should include(micropost)
         end
+      end
+    end
+  end
+
+  describe "dog associations" do
+    before { @user.save }
+    let!(:older_dog) do
+      FactoryGirl.create(:dog, user: @user)
+    end
+    let!(:younger_dog) do
+      FactoryGirl.create(:dog, user: @user)
+    end
+
+    it "should destroy associated dogs" do
+      dogs = @user.dogs.dup
+      @user.destroy
+      dogs.should_not be_empty
+      dogs.each do |dog|
+        Dog.find_by_id(dog.id).should be_nil
       end
     end
   end

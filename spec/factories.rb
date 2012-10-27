@@ -18,4 +18,9 @@ FactoryGirl.define do
 		content "Lorem ipsum"
 		user
 	end
+
+	factory :dog do
+		name "Snoopy"
+		user
+	end
 end
