@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121027195632) do
+ActiveRecord::Schema.define(:version => 20121110181754) do
+
+  create_table "addresses", :force => true do |t|
+    t.string   "street"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zipcode"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "addresses", ["user_id", "created_at"], :name => "index_addresses_on_user_id_and_created_at"
 
   create_table "dogs", :force => true do |t|
     t.string   "name"
@@ -50,10 +62,6 @@ ActiveRecord::Schema.define(:version => 20121027195632) do
     t.string   "password_digest"
     t.string   "remember_token"
     t.boolean  "admin",           :default => false
-    t.string   "street"
-    t.string   "city"
-    t.string   "state"
-    t.integer  "zipcode"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

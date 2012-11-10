@@ -14,9 +14,7 @@ require 'spec_helper'
 describe User do
   before do
   	@user = User.new(name: "Example User", email: "user@example.com", 
-                      password: "foobar", password_confirmation: "foobar",
-                      street: "1 Infinite Loop", city: "Cupertnio", 
-                      state: "CA", zipcode: "90210")
+                      password: "foobar", password_confirmation: "foobar")
   end
   subject { @user }
 
@@ -50,10 +48,7 @@ describe User do
   it { should respond_to(:reverse_relationships) }
   it { should respond_to(:followers) }
   it { should respond_to(:following?) }
-  it { should respond_to(:street) }
-  it { should respond_to(:city) }
-  it { should respond_to(:state) }
-  it { should respond_to(:zipcode) }
+  it { should respond_to(:addresses) }
   it { should respond_to(:dogs) }
 
   it { should be_valid }
@@ -177,6 +172,8 @@ describe User do
       end
     end
 
+
+
     describe "status" do
       let(:unfollowed_post) do
         FactoryGirl.create(:micropost, user: FactoryGirl.create(:user))
@@ -214,6 +211,25 @@ describe User do
       dogs.should_not be_empty
       dogs.each do |dog|
         Dog.find_by_id(dog.id).should be_nil
+      end
+    end
+  end
+
+    describe "address associations" do
+    before { @user.save }
+    let!(:old_address) do
+      FactoryGirl.create(:address, user: @user)
+    end
+    let!(:new_address) do
+      FactoryGirl.create(:address, user: @user)
+    end
+
+    it "should destroy associated addresses" do
+      addresses = @user.addresses.dup
+      @user.destroy
+      addresses.should_not be_empty
+      addresses.each do |address|
+        Address.find_by_id(address.id).should be_nil
       end
     end
   end
