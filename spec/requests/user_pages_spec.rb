@@ -112,6 +112,8 @@ describe "User pages" do
     let!(:m2) { FactoryGirl.create(:micropost, user: user, content: "Bar") }
     let!(:d1) { FactoryGirl.create(:dog, user: user, name: "Nola") }
     let!(:d2) { FactoryGirl.create(:dog, user: user, name: "Snoopy") }
+    let!(:a1) { FactoryGirl.create(:address, user: user, street: "1 Snoopy", city: "ATL", state: "GA", zipcode: "90210") }
+    let!(:a2) { FactoryGirl.create(:address, user: user, street: "2 Snoopy", city: "ATL", state: "GA", zipcode: "90210") }
 
     before do
       sign_in user
@@ -124,6 +126,18 @@ describe "User pages" do
     describe "should have dogs" do
       it { should have_content(d1.name) }
       it { should have_content(d2.name) }
+    end
+
+    describe "should have address" do
+      it { should have_content(a1.street) }
+      it { should have_content(a1.city) }
+      it { should have_content(a1.state) }
+      it { should have_content(a1.zipcode) }
+
+      it { should have_content(a2.street) }
+      it { should have_content(a2.city) }
+      it { should have_content(a2.state) }
+      it { should have_content(a2.zipcode) }
     end
 
     describe "should have follower/following counts" do
