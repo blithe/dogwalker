@@ -12,12 +12,22 @@
 		</section>
 	</aside>
 	<div class="span8">
-		<%= render 'follow_form' if signed_in? %>
-		<% if @user.dogs.any? %>
-			<h3>Dogs</h3>
-			<ul class="dogs">
-				<%= render @dogs %>
-			</ul>
-		<% end %>
+		<section>	
+			<%= render 'follow_form' if signed_in? %>
+			<% if @user.addresses.any? %>
+				<h3>Address</h3>
+				<ul class="addresses">
+					<%= render @addresses %>
+				</ul>
+			<% end %>
+		</section>
+		<section>	
+			<% if @user.dogs.any? %>
+				<h3>Dogs</h3>
+				<ul class="dogs">
+					<%= render @dogs %>
+				</ul>
+			<% end %>
+		</section>
 	</div>
 </div>

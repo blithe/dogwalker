@@ -215,7 +215,7 @@ describe User do
     end
   end
 
-    describe "address associations" do
+  describe "address associations" do
     before { @user.save }
     let!(:old_address) do
       FactoryGirl.create(:address, user: @user)
