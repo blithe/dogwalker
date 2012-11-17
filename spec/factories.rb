@@ -20,12 +20,17 @@ FactoryGirl.define do
 		sequence(:street) { |n| "#{n} Infinite Loop" }
 		city "Cupertino"
 		state "CA"
-		zipcode "90210"
+		zipcode 90210
 		user
 	end
 
 	factory :dog do
 		name "Snoopy"
 		user
+	end
+
+	factory :walktime do
+		sequence(:time) { |n| "#{n}" }
+		dog
 	end
 end

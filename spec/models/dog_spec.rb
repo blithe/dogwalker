@@ -8,6 +8,7 @@ describe Dog do
 
   it { should respond_to(:name) }
   it { should respond_to(:user_id) }
+  it { should respond_to(:walktimes) }
   it { should respond_to(:user) }
   its(:user) { should == user }
 
@@ -34,5 +35,24 @@ describe Dog do
   			Dog.new(user_id: user.id)
   		end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
   	end
+  end
+
+  describe "walktime associations" do
+    before { @dog.save }
+    let!(:wt1) do
+      FactoryGirl.create(:walktime, dog: @dog)
+    end
+    let!(:wt2) do
+      FactoryGirl.create(:walktime, dog: @dog)
+    end
+
+    it "should destroy associated walktimes" do
+      walktimes = @dog.walktimes.dup
+      @dog.destroy
+      walktimes.should_not be_empty
+      walktimes.each do |walktime|
+        Walktime.find_by_id(walktime.id).should be_nil
+      end
+    end
   end
 end
