@@ -5,6 +5,8 @@ namespace :db do
     make_microposts
     make_dogs
     make_relationships
+    make_addresses
+    make_walktimes
   end
 end
 
@@ -12,7 +14,7 @@ def make_users
   admin = User.create!(name: "Example User", email: "example@railstutorial.org", password: "foobar", password_confirmation: "foobar")
   admin.toggle!(:admin)
 
-  99.times do |n|
+  10.times do |n|
     name  = Faker::Name.name
     email = "example-#{n+1}@railstutorial.org"
     password  = "password"
@@ -38,6 +40,29 @@ def make_dogs
   2.times do
     name = Faker::Name.name
     users.each { |user| user.dogs.create!(name: name) }
+  end
+end
+
+def make_walktimes
+  dogs = Dog.all
+  
+  dogs.each { |dog| dog.walktimes.create!(time: 10) }
+  dogs.each { |dog| dog.walktimes.create!(time: 20) }
+
+end
+
+def make_addresses
+  users = User.all(limit: 6)
+    
+  2.times do
+    street = Faker::Address.street_address
+    city = Faker::Address.city
+    state = Faker::Address.us_state
+    zipcode = Faker::Address.zip_code
+    users.each { |user| user.addresses.create!(street: street,
+                                              city: city,
+                                              state: state,
+                                              zipcode: zipcode) }
   end
 end
 

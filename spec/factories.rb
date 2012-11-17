@@ -25,7 +25,7 @@ FactoryGirl.define do
 	end
 
 	factory :dog do
-		name "Snoopy"
+		sequence(:name) { |n| "Snoopy#{n}" }
 		user
 	end
 

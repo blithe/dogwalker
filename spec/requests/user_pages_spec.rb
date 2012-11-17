@@ -112,6 +112,8 @@ describe "User pages" do
     let!(:m2) { FactoryGirl.create(:micropost, user: user, content: "Bar") }
     let!(:d1) { FactoryGirl.create(:dog, user: user, name: "Nola") }
     let!(:d2) { FactoryGirl.create(:dog, user: user, name: "Snoopy") }
+    let!(:wt1) { FactoryGirl.create(:walktime, dog: d1, time: 10) }
+    let!(:wt2) { FactoryGirl.create(:walktime, dog: d1, time: 20) }
     let!(:a1) { FactoryGirl.create(:address, user: user, street: "1 Snoopy", city: "ATL", state: "GA", zipcode: "90210") }
     let!(:a2) { FactoryGirl.create(:address, user: user, street: "2 Snoopy", city: "ATL", state: "GA", zipcode: "90210") }
 
@@ -126,6 +128,11 @@ describe "User pages" do
     describe "should have dogs" do
       it { should have_content(d1.name) }
       it { should have_content(d2.name) }
+    end
+
+    describe "should have dogs' walktimes" do
+      it { should have_content(wt1.time) }
+      it { should have_content(wt2.time) }
     end
 
     describe "should have address" do
