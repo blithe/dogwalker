@@ -1,6 +1,6 @@
 class DogsController < ApplicationController
-	before_filter :signed_in_user, only: [:new, :create, :destroy]
-	before_filter :correct_user, only: :destroy
+	before_filter :signed_in_user, only: [:new, :edit, :create, :destroy]
+	before_filter :correct_user, only: [:destroy, :edit]
 
 	def new
 		@dog = current_user.dogs.build
@@ -15,6 +15,10 @@ class DogsController < ApplicationController
 			@feed_items = []
 			render 'static_pages/home'
 		end
+	end
+
+	def edit
+		@dog = Dog.find(params[:id])
 	end
 
 	def destroy
