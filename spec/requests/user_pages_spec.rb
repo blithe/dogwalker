@@ -114,8 +114,8 @@ describe "User pages" do
     let!(:d2) { FactoryGirl.create(:dog, user: user, name: "Snoopy") }
     let!(:wt1) { FactoryGirl.create(:walktime, dog: d1, time: 10) }
     let!(:wt2) { FactoryGirl.create(:walktime, dog: d1, time: 20) }
-    let!(:a1) { FactoryGirl.create(:address, user: user, street: "1 Snoopy", city: "ATL", state: "GA", zipcode: "90210") }
-    let!(:a2) { FactoryGirl.create(:address, user: user, street: "2 Snoopy", city: "ATL", state: "GA", zipcode: "90210") }
+    let!(:old_address) { FactoryGirl.create(:address, user: user, street: "1 Snoopy", city: "ATL", state: "GA", zipcode: "90210", created_at: 1.day.ago) }
+    let!(:new_address) { FactoryGirl.create(:address, user: user, street: "2 Snoopy", city: "Atlanta", state: "Georgia", zipcode: "90211", created_at: 1.hour.ago) }
 
     before do
       sign_in user
@@ -135,16 +135,18 @@ describe "User pages" do
       it { should have_content(wt2.time_from_integer) }
     end
 
-    describe "should have address" do
-      it { should have_content(a1.street) }
-      it { should have_content(a1.city) }
-      it { should have_content(a1.state) }
-      it { should have_content(a1.zipcode) }
+    describe "should have current address" do
+      it { should have_content(new_address.street) }
+      it { should have_content(new_address.city) }
+      it { should have_content(new_address.state) }
+      it { should have_content(new_address.zipcode) }
+    end
 
-      it { should have_content(a2.street) }
-      it { should have_content(a2.city) }
-      it { should have_content(a2.state) }
-      it { should have_content(a2.zipcode) }
+    describe "should not have older address" do
+      it { should_not have_content(old_address.street) }
+      it { should_not have_content(old_address.city) }
+      it { should_not have_content(old_address.state) }
+      it { should_not have_content(old_address.zipcode) }
     end
 
     describe "should have follower/following counts" do

@@ -17,7 +17,7 @@
 			<% if @user.addresses.any? %>
 				<h3>Address</h3>
 				<ul class="addresses">
-					<%= render @addresses %>
+					<%= render @addresses[0] %>
 				</ul>
 			<% end %>
 		</section>
