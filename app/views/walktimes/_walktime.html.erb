@@ -1,5 +1,5 @@
 <li>
-	<span class="walktime"><%= walktime.time %>
+	<span class="walktime"><%= walktime.time_from_integer %>
 	<% if current_user?(walktime.dog.user) %>
 		<%= link_to "delete", walktime, method: :delete, data: { confirm: "You sure?" }, title: walktime.time %>
 	<% end %>

@@ -131,8 +131,8 @@ describe "User pages" do
     end
 
     describe "should have dogs' walktimes" do
-      it { should have_content(wt1.time) }
-      it { should have_content(wt2.time) }
+      it { should have_content(wt1.time_from_integer) }
+      it { should have_content(wt2.time_from_integer) }
     end
 
     describe "should have address" do
