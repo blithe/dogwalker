@@ -7,4 +7,6 @@ class Address < ActiveRecord::Base
   validates :city, presence: true
   validates :state, presence: true
   validates :zipcode, presence: true
+
+  default_scope order: 'addresses.created_at DESC'
 end

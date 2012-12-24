@@ -218,10 +218,14 @@ describe User do
   describe "address associations" do
     before { @user.save }
     let!(:old_address) do
-      FactoryGirl.create(:address, user: @user)
+      FactoryGirl.create(:address, user: @user, created_at: 1.day.ago)
     end
     let!(:new_address) do
-      FactoryGirl.create(:address, user: @user)
+      FactoryGirl.create(:address, user: @user, created_at: 1.hour.ago)
+    end
+
+    it "should have the right addresses in the right order" do
+      @user.addresses.should == [new_address, old_address]
     end
 
     it "should destroy associated addresses" do
