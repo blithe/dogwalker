@@ -1,6 +1,6 @@
 class DogsController < ApplicationController
-	before_filter :signed_in_user, only: [:new, :edit, :create, :destroy]
-	before_filter :correct_user, only: [:destroy, :edit]
+	before_filter :signed_in_user, only: [:new, :update, :edit, :create, :destroy]
+	before_filter :correct_user, only: [:destroy, :edit, :update]
 
 	def new
 		@dog = current_user.dogs.build
@@ -18,7 +18,16 @@ class DogsController < ApplicationController
 	end
 
 	def edit
-		@dog = Dog.find(params[:id])
+	end
+
+	def update
+	    if @dog.update_attributes(params[:dog])
+	      # Handle a successful update.
+	      flash[:success] = "Dog updated"
+	      redirect_to current_user
+	    else
+	      render 'edit'
+	    end
 	end
 
 	def destroy

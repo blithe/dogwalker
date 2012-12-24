@@ -1,6 +1,7 @@
 <li>
-	<span class="name"><%= dog.name %>
+	<span class="dogname"><%= dog.name %>
 	<% if current_user?(dog.user) %>
+
 		<%= link_to "delete", dog, method: :delete, data: { confirm: "You sure?" }, title: dog.name %>
 	<% end %>
 	</span>
