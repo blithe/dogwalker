@@ -21,19 +21,8 @@ describe "StaticPages" do
       before (:all) { User.delete_all }
       let(:user) { FactoryGirl.create(:user) }
       before do
-        FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
-        FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet")
         sign_in user
         visit root_path
-      end
-
-      it { should have_content(user.microposts.count) }
-      it { should have_content("microposts") }
-
-      it "should render the user's feed" do
-        user.feed.each do |item|
-          page.should have_selector("li##{item.id}", text: item.content)
-        end
       end
 
       describe "follower/following counts" do
@@ -45,23 +34,6 @@ describe "StaticPages" do
 
         it { should have_link("0 following", href: following_user_path(user)) }
         it { should have_link("1 followers", href: followers_user_path(user)) }
-      end
-
-      describe "should have micropost pagination" do
-        before(:all) { 31.times { FactoryGirl.create(:micropost, user: user) } }
-        after(:all) { user.microposts.delete_all }
-        it { should have_selector('div.pagination') }
-      end
-
-      describe "micropost delete links" do
-        let(:other_user) { FactoryGirl.create(:user) }
-        let!(:m3) { FactoryGirl.create(:micropost, user: other_user, content: "Foo") }    
-        
-        it "should exist for current user" do
-          user.feed.each do |item|
-            find("li##{item.id}").should have_link('delete')
-          end
-        end
       end
     end
   end
