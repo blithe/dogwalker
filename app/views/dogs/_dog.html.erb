@@ -5,12 +5,12 @@
 		<%= link_to "delete", dog, method: :delete, data: { confirm: "You sure?" }, title: dog.name %>
 	<% end %>
 	</span>
-	<span class="walktimes">
+	<div class="walktimes">
 		<% if dog.walktimes.any? %>
 			Walk times:
 			<ol class="walktimes">
 				<%= render dog.walktimes %>
 			</ol>
 		<% end %>
-	</span>
+	</div>
 </li>

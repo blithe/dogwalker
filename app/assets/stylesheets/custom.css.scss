@@ -252,13 +252,17 @@ aside {
   margin: 10px 0 0 0;
 
   li {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
+    padding: 0 0 3px 0;
   }
 }
 
 .dogname {
   display: block;
+  font-weight:bold;
+  
+  a {
+    font-weight:normal;
+  }
 }
 
 .walktimes {
