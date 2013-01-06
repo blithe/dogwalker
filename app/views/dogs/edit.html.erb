@@ -13,3 +13,20 @@
 		<% end %>
 	</div>
 </div>
+<div class="row">	
+	<div class="span6 offset3">
+		<span class="walktimes">
+			<% if @dog.walktimes.any? %>
+				Walk times:
+				<ol class="walktimes">
+					<%= render @dog.walktimes %>
+				</ol>
+			<% end %>
+		</span>
+	</div>
+</div>
+<div class="row">
+	<div class="span6 offset3">
+		<%= render 'shared/walktime_form', dog: @dog, walktime: Walktime.new %>
+	</div>
+</div>

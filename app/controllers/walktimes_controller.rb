@@ -3,26 +3,34 @@ class WalktimesController < ApplicationController
 	before_filter :correct_user, only: :destroy
 
 	def create
-		@walktime = current_user.dogs.walktimes.build(params[:walktime])
+		@dog = current_user.dogs.find_by_id(params[:walktime][:dog_id])
+		@walktime = @dog.walktimes.new
+		@walktime.time = params[:walktime][:time]
+		@walktime.dog = @dog
 		if @walktime.save
-			flash[:success] = "Created walk time."
-			redirect_to root_url
+			flash[:success] = "Walktime added!"
 		else
-			@feed_items = []
-			render 'static_pages/home'
+			flash[:error] = "Error saving walktime!"
 		end
+		redirect_to edit_dog_path(@dog)
 	end
 
 	def destroy
-		@walktime.destroy
-		redirect_to root_url
+		@walktime = Walktime.find_by_id(params[:id])
+		@dog = @walktime.dog
+		if @walktime.destroy
+			flash[:success] = "Walktime deleted!"
+		else
+			flash[:error] = "Error deleting walktime!"
+		end
+		redirect_to edit_dog_path(@dog)
 	end
 
 	private
 
 		def correct_user
-			@dog = current_user.dogs.find_by_id(params[:id])
-			@walktime = @dog.walktime
-			redirect_to root_url if @walktime.nil?
+			@walktime = Walktime.find_by_id(params[:id])
+			@dog = current_user.dogs.find_by_id(@walktime.dog_id)
+			redirect_to root_url if @dog.nil?
 		end
 end

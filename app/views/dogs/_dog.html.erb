@@ -7,9 +7,10 @@
 	</span>
 	<span class="walktimes">
 		<% if dog.walktimes.any? %>
-			<ol class="walktimes">
+			Walk times:
+			<ul class="walktimes">
 				<%= render dog.walktimes %>
-			</ol>
+			</ul>
 		<% end %>
 	</span>
 </li>
