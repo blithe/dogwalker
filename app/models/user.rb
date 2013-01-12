@@ -12,7 +12,6 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :name, :password, :password_confirmation
   has_secure_password
-  has_many :microposts, dependent: :destroy
   has_many :addresses, dependent: :destroy
   has_many :dogs, dependent: :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
@@ -22,10 +21,6 @@ class User < ActiveRecord::Base
 
   before_save { self.email.downcase! }
   before_save :create_remember_token 
-
-  def feed
-    Micropost.from_users_followed_by(self)
-  end
 
   def following?(other_user)
     relationships.find_by_followed_id(other_user.id)

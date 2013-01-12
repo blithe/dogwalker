@@ -11,10 +11,6 @@ FactoryGirl.define do
 		end
 	end
 
-	factory :micropost do
-		content "Lorem ipsum"
-		user
-	end
 
 	factory :address do
 		sequence(:street) { |n| "#{n} Infinite Loop" }

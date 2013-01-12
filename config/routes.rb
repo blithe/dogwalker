@@ -6,7 +6,6 @@ DogwalkerApp::Application.routes.draw do
   end
 
   resources :sessions, only: [:new, :create, :destroy]
-  resources :microposts, only: [:create, :destroy]
   resources :dogs, only: [:new, :edit, :update, :create, :destroy]
   resources :addresses, only: [:new, :create, :destroy]
   resources :walktimes, only: [:create, :destroy]

@@ -108,8 +108,6 @@ describe "User pages" do
  describe "profile page" do
     before(:all) { User.delete_all }
     let(:user) { FactoryGirl.create(:user) }
-    let!(:m1) { FactoryGirl.create(:micropost, user: user, content: "Foo") }
-    let!(:m2) { FactoryGirl.create(:micropost, user: user, content: "Bar") }
     let!(:d1) { FactoryGirl.create(:dog, user: user, name: "Nola") }
     let!(:d2) { FactoryGirl.create(:dog, user: user, name: "Snoopy") }
     let!(:wt1) { FactoryGirl.create(:walktime, dog: d1, time: 10) }
