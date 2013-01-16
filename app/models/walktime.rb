@@ -7,6 +7,7 @@ class Walktime < ActiveRecord::Base
   													less_than_or_equal_to: 23 }
   validates :dog_id, presence: true
 
+  default_scope order: 'walktimes.time ASC'
 
 	def time_from_integer
 		times = ["12:00 am", "1:00 am", "2:00 am", "3:00 am", "4:00 am", "5:00 am",
