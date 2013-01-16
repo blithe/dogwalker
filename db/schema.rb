@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121117153100) do
+ActiveRecord::Schema.define(:version => 20130116022504) do
 
   create_table "addresses", :force => true do |t|
     t.string   "street"
@@ -28,8 +28,12 @@ ActiveRecord::Schema.define(:version => 20121117153100) do
   create_table "dogs", :force => true do |t|
     t.string   "name"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "dogs", ["user_id"], :name => "index_dogs_on_user_id"
