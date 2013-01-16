@@ -45,3 +45,4 @@ DogwalkerApp::Application.configure do
     }
   }
 end
+
