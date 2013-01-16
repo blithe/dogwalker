@@ -19,7 +19,7 @@
 			<% if @dog.walktimes.any? %>
 				Walk times:
 				<ol class="walktimes">
-					<%= render @dog.walktimes %>
+					<%= render @dog.walktimes, edit_page: true %>
 				</ol>
 			<% end %>
 		</span>
