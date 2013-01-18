@@ -262,13 +262,23 @@ aside {
   }
 }
 
+.doginfo {
+   float: left;
+}
+
 .dogname {
   display: block;
   font-weight:bold;
-  
   a {
     font-weight:normal;
   }
+}
+
+.dogavatar {
+  float: left;
+  padding: 0 10px;
+  display: inline-block;
+  width: 100px;
 }
 
 .walktimes {

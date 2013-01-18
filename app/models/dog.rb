@@ -10,5 +10,6 @@ class Dog < ActiveRecord::Base
     thumb: '100x100>',
     square: '200x200#',
     medium: '300x300>'
-  }
+  }, 
+  default_url: "https://s3.amazonaws.com/blitherocher/dogs/avatars/default_dog.gif"
 end

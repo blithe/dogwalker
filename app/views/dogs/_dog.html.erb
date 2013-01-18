@@ -1,22 +1,22 @@
 <li>
 	<div class="dogavatar">
-		<% if dog.avatar %>
-			<%= image_tag dog.avatar.url(:thumb) %>
-		<% end %>
+		<%= image_tag dog.avatar.url(:thumb) %>
 	</div>	
 
-	<span class="dogname"><%= dog.name %>
-		<% if current_user?(dog.user) %>
-			<%= link_to "edit", edit_dog_path(dog), title: dog.name %>
-			<%= link_to "delete", dog, method: :delete, data: { confirm: "You sure?" }, title: dog.name %>
-		<% end %>
-	</span>
-	<div class="walktimes">
-		<% if dog.walktimes.any? %>
-			Walk times:
-			<ol class="walktimes">
-				<%= render dog.walktimes, edit_page: false %>
-			</ol>
-		<% end %>
+	<div class="doginfo">
+		<span class="dogname"><%= dog.name %>
+			<% if current_user?(dog.user) %>
+				<%= link_to "edit", edit_dog_path(dog), title: dog.name %>
+				<%= link_to "delete", dog, method: :delete, data: { confirm: "You sure?" }, title: dog.name %>
+			<% end %>
+		</span>
+		<div class="walktimes">
+			<% if dog.walktimes.any? %>
+				Walk times:
+				<ol class="walktimes">
+					<%= render dog.walktimes, edit_page: false %>
+				</ol>
+			<% end %>
+		</div>
 	</div>
 </li>
