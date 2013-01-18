@@ -4,6 +4,8 @@
 	<%= f.label :name %>
 	<%= f.text_field :name %>
 
+	<%= f.label :avatar %>
+  	<%= f.file_field :avatar %>
 		
-	<%= f.submit "Create dog", class: "btn btn-large btn-primary" %>
+	<%= f.submit "#{button}", class: "btn btn-large btn-primary" %>
 <% end %>
