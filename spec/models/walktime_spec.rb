@@ -34,7 +34,7 @@ describe Walktime do
   	it { should_not be_valid }
   end
 
-  describe "with time that not an integer" do
+  describe "with time that is not an integer" do
   	before { @walktime.time = "a" }
   	it { should_not be_valid }
   end

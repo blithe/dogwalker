@@ -12,4 +12,29 @@ class Dog < ActiveRecord::Base
     medium: '300x300>'
   }, 
   default_url: "https://s3.amazonaws.com/blitherocher/dogs/avatars/default_dog.gif"
+
+  def available_times
+    available = []    
+    
+    Walktime.new.times_array.each do |time|
+      # if dog does not already have walk time, return it
+      if taken_times.include?(time[1])
+        # skip it
+      else
+        available.push(time)
+      end
+    end
+
+    return available
+  end 
+
+  def taken_times
+    taken = []
+
+    walktimes.each do |walktime|
+      taken.push(walktime.time)
+    end 
+
+    return taken
+  end
 end
