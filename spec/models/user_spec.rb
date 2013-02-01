@@ -46,6 +46,10 @@ describe User do
   it { should respond_to(:reverse_relationships) }
   it { should respond_to(:followers) }
   it { should respond_to(:following?) }
+  it { should respond_to(:walks) }
+  it { should respond_to(:scheduled_walktimes) }
+  it { should respond_to(:walking?) }
+  it { should respond_to(:schedule!) }
   it { should respond_to(:addresses) }
   it { should respond_to(:dogs) }
 
@@ -216,6 +220,33 @@ describe User do
       @user.destroy
       relationships.each do |relationship|
         Relationship.find_by_id(followed.id).should be_nil
+      end
+    end
+  end
+
+  describe "walking" do
+    let(:dog) { FactoryGirl.create(:dog, user: @user, name: "Snoopy") }
+    let(:walktime) { FactoryGirl.create(:walktime, dog: dog, time: 20) }
+    before do
+      @user.save
+      @user.schedule!(walktime)
+    end
+
+    it { should be_walking(walktime) }
+    its(:scheduled_walktimes) { should include(walktime) }
+
+    describe "and unscheduling" do
+      before { @user.unschedule!(walktime) }
+
+      it { should_not be_walking(walktime) }
+      its(:scheduled_walktimes) { should_not include(walktime) }
+    end
+
+    it "should destroy associated walks" do
+      walks = @user.walks
+      @user.destroy
+      walks.each do |walk|
+        Walk.find_by_id(scheduled.id).should be_nil
       end
     end
   end

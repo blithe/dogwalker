@@ -2,6 +2,9 @@ class Walktime < ActiveRecord::Base
   attr_accessible :time
   belongs_to :dog
 
+  has_many :schedulers, through: :reverse_walks, source: :scheduler
+  has_many :reverse_walks, foreign_key: "scheduled_id", class_name: "Walk", dependent: :destroy
+
   validates :time, presence: true, numericality: { 	only_integer: true,
   													greater_than_or_equal_to: 0,
   													less_than_or_equal_to: 23 }

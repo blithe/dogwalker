@@ -15,9 +15,12 @@ class User < ActiveRecord::Base
   has_many :addresses, dependent: :destroy
   has_many :dogs, dependent: :destroy
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
+  has_many :walks, foreign_key: "scheduler_id", dependent: :destroy
   has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
+  has_many :scheduled_walktimes, through: :walks, source: :scheduled
   has_many :followers, through: :reverse_relationships, source: :follower
+  
 
   before_save { self.email.downcase! }
   before_save :create_remember_token 
@@ -32,6 +35,18 @@ class User < ActiveRecord::Base
 
   def unfollow!(other_user)
     relationships.find_by_followed_id(other_user).destroy
+  end
+
+    def walking?(walktime)
+    walks.find_by_scheduled_id(walktime.id)
+  end
+
+  def schedule!(walktime)
+    walks.create!(scheduled_id: walktime.id)
+  end
+
+  def unschedule!(walktime)
+    walks.find_by_scheduled_id(walktime).destroy
   end
 
   private
