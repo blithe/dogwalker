@@ -10,6 +10,7 @@ DogwalkerApp::Application.routes.draw do
   resources :addresses, only: [:new, :create, :destroy]
   resources :walktimes, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
+  resources :walks, only: [:create, :destroy]
 
   root to: 'static_pages#home'
 

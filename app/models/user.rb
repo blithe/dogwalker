@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
     relationships.find_by_followed_id(other_user).destroy
   end
 
-    def walking?(walktime)
+  def walking?(walktime)
     walks.find_by_scheduled_id(walktime.id)
   end
 

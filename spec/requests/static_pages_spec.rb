@@ -18,21 +18,25 @@ describe "StaticPages" do
     it { should_not have_selector 'title', text: '| Home' }
 
     describe "for signed-in users" do
-      before (:all) { User.delete_all }
       let(:user) { FactoryGirl.create(:user) }
+      let(:address) { FactoryGirl.create(:address, user: user, street: "110 Portia") }
       let(:dog) { FactoryGirl.create(:dog, user: user, name: "Snoopy") }
       let(:walktime) { FactoryGirl.create(:walktime, dog: dog, time: 20) }
-      let(:scheduled_walk) { @user.walks.build( scheduled_id: walktime.id) }
       before do
         sign_in user
+        user.schedule!(walktime)
         visit root_path
       end
 
       it "should render the user's feed" do
         
         user.feed.each do |item|
-          page.should have_selector("li##{item.id}", text: item.content)
+          page.should have_selector("li##{item.id}", text: item.scheduled.time_from_integer)
         end
+      end
+
+      describe "scheduled count" do
+        it { should have_content("Scheduled Walks (1)") }
       end
 
       describe "follower/following counts" do

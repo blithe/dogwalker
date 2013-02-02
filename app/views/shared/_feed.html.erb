@@ -1,6 +1,7 @@
-<% if @feed_items.any? %>
+<% @user ||= current_user %>
+<% if @user.walks.any? %>
+	<h3>Scheduled Walks (<%= @user.walks.count %>)</h3>
 	<ol class="walks">
-		<%= render partial: 'shared/feed_item', collection: @feed_items %>
+		<%= render @walks %>
 	</ol>
-	<%= will_paginate @feed_items %>
 <% end %>

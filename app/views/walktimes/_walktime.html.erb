@@ -1,7 +1,8 @@
 <li>
 	<div class="walktime"><%= walktime.time_from_integer %>
-	<% if current_user?(walktime.dog.user) && edit_page %>
-		<%= link_to "delete", walktime, method: :delete, data: { confirm: "You sure?" }, title: walktime.time %>
-	<% end %>
+		<%= render 'shared/schedule_form', walktime: walktime if signed_in? %>
+		<% if current_user?(walktime.dog.user) && edit_page %>
+			<%= link_to "delete", walktime, method: :delete, data: { confirm: "You sure?" }, title: walktime.time %>
+		<% end %>
 	</div>
 </li>

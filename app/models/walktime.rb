@@ -9,7 +9,6 @@ class Walktime < ActiveRecord::Base
   													greater_than_or_equal_to: 0,
   													less_than_or_equal_to: 23 }
   validates :dog_id, presence: true
-  validates_uniqueness_of :time
 
   default_scope order: 'walktimes.time ASC'
 
@@ -26,4 +25,8 @@ class Walktime < ActiveRecord::Base
 						 ["3:00 pm", 15], ["4:00 pm", 16], ["5:00 pm", 17], ["6:00 pm", 18], ["7:00 pm", 19], 
 						 ["8:00 pm", 20], ["9:00 pm", 21], ["10:00 pm", 22], ["11:00 pm", 23]]
 	end
+
+	def scheduled?
+    	reverse_walks.include?(self.id)
+  	end
 end
