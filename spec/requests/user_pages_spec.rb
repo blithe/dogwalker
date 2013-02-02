@@ -236,7 +236,7 @@ describe "User pages" do
 
         it "should decrement the scheduled walktime count" do
           expect do
-            click_button "Unschedule"
+            click_button "#{walktime.id}" 
           end.to change(user.scheduled_walktimes, :count).by(-1)
         end
 
