@@ -49,6 +49,10 @@ class User < ActiveRecord::Base
     walks.find_by_scheduled_id(walktime).destroy
   end
 
+  def feed
+    walks
+  end
+
   private
 
   	def create_remember_token

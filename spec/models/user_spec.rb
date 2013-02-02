@@ -167,6 +167,19 @@ describe User do
     end
   end
 
+  describe "walk associations" do
+    before { @user.save }
+    let!(:dog) { FactoryGirl.create(:dog, user: @user) }
+    let(:walktime) { FactoryGirl.create(:walktime, dog: dog, time: 20) }
+    let(:scheduled_walk) { @user.walks.build( scheduled_id: walktime.id) }
+
+    describe "scheduled walks" do
+      let(:unscheduled_walk) { FactoryGirl.create(:walktime, dog: dog, time: 10) }
+
+      its(:feed) { should include(scheduled_walk) }
+      its(:feed) { should_not include(unscheduled_walk) }
+    end
+  end
 
 
   describe "address associations" do
