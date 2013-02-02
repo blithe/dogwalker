@@ -52,6 +52,7 @@ describe User do
   it { should respond_to(:schedule!) }
   it { should respond_to(:addresses) }
   it { should respond_to(:dogs) }
+  it { should respond_to(:feed) }
 
   it { should be_valid }
 
@@ -153,12 +154,8 @@ describe User do
 
   describe "dog associations" do
     before { @user.save }
-    let!(:older_dog) do
-      FactoryGirl.create(:dog, user: @user)
-    end
-    let!(:younger_dog) do
-      FactoryGirl.create(:dog, user: @user)
-    end
+    let!(:older_dog) { FactoryGirl.create(:dog, user: @user) }
+    let!(:younger_dog) { FactoryGirl.create(:dog, user: @user) }
 
     it "should destroy associated dogs" do
       dogs = @user.dogs.dup
@@ -170,14 +167,12 @@ describe User do
     end
   end
 
+
+
   describe "address associations" do
     before { @user.save }
-    let!(:old_address) do
-      FactoryGirl.create(:address, user: @user, created_at: 1.day.ago)
-    end
-    let!(:new_address) do
-      FactoryGirl.create(:address, user: @user, created_at: 1.hour.ago)
-    end
+    let!(:old_address) { FactoryGirl.create(:address, user: @user, created_at: 1.day.ago) }
+    let!(:new_address) { FactoryGirl.create(:address, user: @user, created_at: 1.hour.ago) }
 
     it "should have the right addresses in the right order" do
       @user.addresses.should == [new_address, old_address]
