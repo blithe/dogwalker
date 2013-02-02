@@ -207,6 +207,45 @@ describe "User pages" do
         end
       end
     end
+
+    describe "schedule/unschedule buttons" do
+      let(:dog) { FactoryGirl.create(:dog, user: user) }
+      let(:walktime) { FactoryGirl.create(:walktime, dog: dog) }
+      before { sign_in user }
+
+      describe "scheduling a walktime" do
+        before { visit user_path(user) }
+
+        it "should increment the scheduled walktimes count" do
+          expect do
+            click_button "Schedule"
+          end.to change(user.scheduled_walktimes, :count).by(1)
+        end
+
+        describe "toggling the button" do
+          before { click_button "Schedule" }
+          it { should have_selector('input', value: 'Unschedule') }
+        end
+      end
+
+      describe "unscheduling a walktime" do
+        before do
+          user.schedule!(walktime)
+          visit user_path(user)
+        end
+
+        it "should decrement the scheduled walktime count" do
+          expect do
+            click_button "Unschedule"
+          end.to change(user.scheduled_walktimes, :count).by(-1)
+        end
+
+        describe "toggling the button" do
+          before { click_button "Unschedule" }
+          it { should have_selector('input', value: 'Schedule') }
+        end
+      end
+    end
   end
 
  describe "edit" do

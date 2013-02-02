@@ -4,14 +4,14 @@ class WalksController < ApplicationController
 	respond_to :html, :js
 
 	def create
-		@walktime = User.find(params[:walk][:scheduled_id])
+		@walktime = Walktime.find(params[:walk][:scheduled_id])
 		current_user.schedule!(@walktime)
-		respond_with @walktime.user
+		respond_with @walktime.dog.user
 	end
 
 	def destroy
-		@walktime = walk.find(params[:id]).scheduled
+		@walktime = Walk.find(params[:id]).scheduled
 		current_user.unschedule!(@walktime)
-		respond_with @walktime.user
+		respond_with @walktime.dog.user
 	end
 end
