@@ -4,7 +4,7 @@
 	</div>	
 
 	<div class="doginfo">
-		<span class="dogname"><%= dog.name %>
+		<span class="dogname"><%= link_to dog.name, dog.user %>
 			<% if current_user?(dog.user) %>
 				<%= link_to "edit", edit_dog_path(dog), title: dog.name %>
 				<%= link_to "delete", dog, method: :delete, data: { confirm: "You sure?" }, title: dog.name %>
