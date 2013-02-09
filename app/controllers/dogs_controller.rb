@@ -17,6 +17,10 @@ class DogsController < ApplicationController
 		end
 	end
 
+	def index
+    	@dogs = Dog.paginate(page: params[:page])
+  	end
+
 	def edit
 		@dog = Dog.find(params[:id])
 	end
