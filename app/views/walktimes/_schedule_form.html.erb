@@ -1,6 +1,6 @@
 <% if current_user.walking?(walktime) %>
 	<%= render 'walktimes/unschedule', walktime: walktime %>
+<% elsif walktime.scheduled? %>
 <% else %>
 	<%= render 'walktimes/schedule', walktime: walktime %>
 <% end %>
-

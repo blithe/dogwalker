@@ -216,6 +216,8 @@ describe "User pages" do
       describe "scheduling a walktime" do
         before { visit user_path(user) }
 
+        it { should have_selector('input', value: 'Schedule') }
+
         it "should increment the scheduled walktimes count" do
           expect do
             click_button "Schedule"
@@ -225,7 +227,18 @@ describe "User pages" do
         describe "toggling the button" do
           before { click_button "Schedule" }
           it { should have_selector('input', value: 'Unschedule') }
+        end  
+      end
+
+      describe "for a time that is already scheduled" do
+        let(:other_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
+        before do
+          other_user.schedule!(walktime)
+          sign_in user
+          visit user_path(user)
         end
+
+        it { should_not have_button('Unschedule') }
       end
 
       describe "unscheduling a walktime" do

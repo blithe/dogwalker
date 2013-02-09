@@ -27,6 +27,6 @@ class Walktime < ActiveRecord::Base
 	end
 
 	def scheduled?
-    	reverse_walks.include?(self.id)
+    	reverse_walks.find_by_scheduled_id(self.id)
   	end
 end

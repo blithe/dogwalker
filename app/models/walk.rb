@@ -6,4 +6,5 @@ class Walk < ActiveRecord::Base
 
   validates :scheduler_id, presence: true
   validates :scheduled_id, presence: true
+  validates_uniqueness_of :scheduled_id
 end
