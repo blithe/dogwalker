@@ -15,9 +15,9 @@
 		<section>	
 			<%= render 'follow_form' if signed_in? %>
 			<% if @user.addresses.any? %>
-				<h3>Address</h3>
+				<h3>Addresses</h3>
 				<ul class="addresses">
-					<%= render @addresses[0] %>
+					<%= render @addresses %>
 				</ul>
 			<% end %>
 		</section>

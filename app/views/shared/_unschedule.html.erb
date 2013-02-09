@@ -1,3 +1,0 @@
-<%= form_for(current_user.walks.find_by_scheduled_id(walktime), html: { method: :delete }, remote: true) do |f| %>
-	<%= f.submit "Unschedule", class: "btn btn-large" %>
-<% end %>

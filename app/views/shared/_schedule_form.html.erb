@@ -1,7 +1,0 @@
-<div id="schedule_form">
-<% if current_user.walking?(walktime) %>
-	<%= render 'shared/unschedule', walktime: walktime %>
-<% else %>
-	<%= render 'shared/schedule', walktime: walktime unless walktime.scheduled? %>
-<% end %>
-</div>

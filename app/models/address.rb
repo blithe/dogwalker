@@ -4,6 +4,7 @@ class Address < ActiveRecord::Base
   geocoded_by :full_street_address
   after_validation :geocode
 
+
   validates :user_id, presence: true
   validates :street, presence: true
   validates :city, presence: true

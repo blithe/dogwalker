@@ -1,4 +1,0 @@
-<%= form_for(current_user.walks.build(scheduled_id: walktime.id), remote: true) do |f| %>
-	<div><%= f.hidden_field :scheduled_id %></div>
-	<%= f.submit "Schedule", class: "btn btn-large btn-primary" %>
-<% end %>
