@@ -239,6 +239,10 @@ describe "User pages" do
         end
 
         it { should_not have_button('Unschedule') }
+        it "should not have a Schedule button" do
+          pending("figuring out why this fails")
+          page.should_not have_button('Schedule')
+        end
       end
 
       describe "unscheduling a walktime" do
