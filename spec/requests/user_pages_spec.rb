@@ -140,11 +140,11 @@ describe "User pages" do
       it { should have_content(new_address.zipcode) }
     end
 
-    describe "should not have older address" do
-      it { should_not have_content(old_address.street) }
-      it { should_not have_content(old_address.city) }
-      it { should_not have_content(old_address.state) }
-      it { should_not have_content(old_address.zipcode) }
+    describe "should have old address" do
+      it { should have_content(old_address.street) }
+      it { should have_content(old_address.city) }
+      it { should have_content(old_address.state) }
+      it { should have_content(old_address.zipcode) }
     end
 
     describe "should have follower/following counts" do
