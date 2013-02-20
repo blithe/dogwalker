@@ -12,7 +12,7 @@ guard 'spork', :rspec_env => { 'RAILS_ENV' => 'test' } do
   watch('spec/support/') 
 end
 
-guard 'rspec', :version => 2, :all_after_pass => false, :cli => '--drb' do
+guard 'rspec', :version => 2, :all_on_start => false, :all_after_pass => false, :cli => '--drb' do
 
   watch(%r{^app/controllers/(.+)_(controller)\.rb$}) do |m|
     ["spec/routing/#{m[1]}_routing_spec.rb",
@@ -21,10 +21,23 @@ guard 'rspec', :version => 2, :all_after_pass => false, :cli => '--drb' do
      (m[1][/_pages/] ? "spec/requests/#{m[1]}_spec.rb" :
                        "spec/requests/#{m[1].singularize}_pages_spec.rb")]
   end
+  
   watch(%r{^app/views/(.+)/}) do |m|
     (m[1][/_pages/] ? "spec/requests/#{m[1]}_spec.rb" :
                       "spec/requestes/#{m[1].singularize}_pages_spec.rb")
   end
+
+  watch(%r{^spec/.+_spec\.rb})
+  watch(%r{^lib/(.+)\.rb})     { |m| "spec/lib/#{m[1]}_spec.rb" }
+  watch('spec/spec_helper.rb') { "spec" }
+
+  # Rails example
+  watch('spec/spec_helper.rb')                       { "spec" }
+  watch('config/routes.rb')                          { "spec/routing" }
+  watch('app/controllers/application_controller.rb') { "spec/controllers" }
+  watch(%r{^spec/.+_spec\.rb})
+  watch(%r{^app/(.+)\.rb})                           { |m| "spec/#{m[1]}_spec.rb" }
+  watch(%r{^lib/(.+)\.rb})                           { |m| "spec/lib/#{m[1]}_spec.rb" }
 end
 
 
