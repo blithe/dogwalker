@@ -10,3 +10,7 @@
 </ul>
 
 <%= will_paginate %>
+
+<script type="text/javascript">
+	var dog_locations = <%= raw @dogs.to_json(:methods => :address) %>
+</script>

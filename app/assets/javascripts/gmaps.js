@@ -1,8 +1,12 @@
 $(document).ready(function() {
   	var mapOptions = {
-    	center: new google.maps.LatLng(-34.397, 150.644),
-    	zoom: 8,
-    	mapTypeId: google.maps.MapTypeId.ROADMAP
+    	center: new google.maps.LatLng(33.850145, -84.332256),
+    	zoom: 10,
+    	max_zoom: 16,
+    	mapTypeId: google.maps.MapTypeId.ROADMAP,
+    	MapTypeControlOptions: {
+    		MapTypeIds: [google.maps.MapTypeId.ROADMAP]
+    	}
     };
     
 	if (document.getElementById("map_canvas")) {
@@ -10,10 +14,11 @@ $(document).ready(function() {
 	    	mapOptions);
 	};
 
-
-    var marker = new google.maps.Marker({
-	    position: map.getCenter(),
-	    map: map,
-	    title: 'Click to zoom'
-	});
+	for (var i in dog_locations) {
+	    var marker = new google.maps.Marker({
+		    position: new google.maps.LatLng(dog_locations[i].address.latitude, dog_locations[i].address.longitude),
+		    map: map,
+		    title: 'Dog!'
+		});
+	}
 });

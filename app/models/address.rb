@@ -4,14 +4,13 @@ class Address < ActiveRecord::Base
   geocoded_by :full_street_address
   after_validation :geocode
 
+  default_scope order: 'addresses.updated_at DESC'
 
   validates :user_id, presence: true
   validates :street, presence: true
   validates :city, presence: true
   validates :state, presence: true
   validates :zipcode, presence: true
-
-  default_scope order: 'addresses.created_at DESC'
 
   def full_street_address
   	[street, city, state, zipcode].compact.join(', ')

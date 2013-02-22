@@ -13,6 +13,10 @@ class Dog < ActiveRecord::Base
   }, 
   default_url: "https://s3.amazonaws.com/blitherocher/dogs/avatars/default_dog.gif"
 
+  def address
+    self.user.addresses.first
+  end
+
   def available_times
     available = []    
     
