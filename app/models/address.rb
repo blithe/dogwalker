@@ -7,10 +7,10 @@ class Address < ActiveRecord::Base
   default_scope order: 'addresses.updated_at DESC'
 
   validates :user_id, presence: true
-  validates :street, presence: true
-  validates :city, presence: true
-  validates :state, presence: true
-  validates :zipcode, presence: true
+  validates :street, presence: true, length: { minimum: 2 }
+  validates :city, presence: true, length: { minimum: 2 }
+  validates :state, presence: true, length: { minimum: 2 }
+  validates :zipcode, presence: true, length: { is: 5 }, numericality: :only_integer
 
   def full_street_address
   	[street, city, state, zipcode].compact.join(', ')

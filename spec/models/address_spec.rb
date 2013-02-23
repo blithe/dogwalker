@@ -42,6 +42,26 @@ describe Address do
     it { should_not be_valid }
   end
 
+  describe "with zipcode that is not a number" do
+    before { @address.zipcode = "poops" }
+    it { should_not be_valid }
+  end
+
+  describe "with zipcode that is too short" do
+    before { @address.zipcode = 244 }
+    it { should_not be_valid }
+  end
+
+  describe "with zipcode that is too long" do
+    before { @address.zipcode = 244565 }
+    it { should_not be_valid }
+  end
+
+  describe "with zipcode that is the correct length" do
+    before { @address.zipcode = 24456 }
+    it { should be_valid }
+  end
+
   describe "accessible attributes" do
   	it " should not allow access to user_id" do
   		expect do

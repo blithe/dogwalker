@@ -13,10 +13,10 @@ class AddressesController < ApplicationController
 		@address = current_user.addresses.build(params[:address])
 		if @address.save
 			flash[:success] = "Address Added!"
-			redirect_to root_url
+			redirect_to current_user
 		else
-			@feed_items = []
-			render 'static_pages/home'
+			flash[:error] = "Error saving address!"
+			render 'new'
 		end
 	end
 
