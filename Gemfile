@@ -9,6 +9,7 @@ gem 'bootstrap-will_paginate', '0.0.6'
 gem 'faker', '1.0.1'
 gem 'geocoder'
 gem 'jquery-rails', '2.0.2'
+gem 'mail'
 gem 'paperclip'
 gem 'rails', '3.2.12'
 gem 'simplecov', :require => false, :group => :test
