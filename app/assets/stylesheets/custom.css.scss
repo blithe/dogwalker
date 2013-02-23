@@ -258,12 +258,14 @@ aside {
 
 .dogs {
   list-style: none;
-  margin: 10px 0 0 0;
-
-
+  margin: 0;
   li {
-    padding: 0 0 3px 0;
-    clear: both;
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 1px solid $grayLighter;
+    &:last-child {
+      border-bottom: 1px solid $grayLighter;
+    }
   }
 }
 
@@ -283,13 +285,18 @@ aside {
   float: left;
   padding: 0 10px;
   display: inline-block;
-  width: 100px;
 }
 
 .walktimes {
   list-style: none;
   display: block;
   margin: 10px 0 0 0;
+  li {
+    border: none;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
 }
 
 .walktime{
@@ -338,4 +345,25 @@ aside {
   box-shadow: rgba(64, 64, 64, 0.1) 0 2px 5px;
   width: 800px;
   height: 400px;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+ 
+.clearfix {
+  display: inline-block;
+}
+ 
+html[xmlns] .clearfix {
+  display: block;
+}
+ 
+* html .clearfix {
+  height: 1%;
 }

@@ -19,6 +19,7 @@ class DogsController < ApplicationController
 
 	def index
     	@dogs = Dog.paginate(page: params[:page])
+    	@user = current_user
   	end
 
 	def edit

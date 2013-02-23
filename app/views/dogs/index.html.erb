@@ -13,4 +13,5 @@
 
 <script type="text/javascript">
 	var dog_locations = <%= raw @dogs.to_json(:methods => :address) %>
+	var user_location = <%= raw @user.to_json(:include => :addresses) %>
 </script>

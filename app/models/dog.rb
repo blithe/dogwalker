@@ -7,11 +7,11 @@ class Dog < ActiveRecord::Base
   validates :user_id, presence: true
 
   has_attached_file :avatar, styles: {
-    thumb: '100x100>',
+    thumb: '52x52>',
     square: '200x200#',
     medium: '300x300>'
   }, 
-  default_url: "https://s3.amazonaws.com/blitherocher/dogs/avatars/default_dog.gif"
+  default_url: "https://s3.amazonaws.com/blitherocher/dogs/avatars/default_dog-1.gif"
 
   def address
     self.user.addresses.first

@@ -1,6 +1,6 @@
 $(document).ready(function() {
-  	var mapOptions = {
-    	center: new google.maps.LatLng(33.850145, -84.332256),
+	var mapOptions = {
+    	center: new google.maps.LatLng(user_location.addresses[0].latitude, user_location.addresses[0].longitude),
     	zoom: 10,
     	max_zoom: 16,
     	mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -18,7 +18,19 @@ $(document).ready(function() {
 	    var marker = new google.maps.Marker({
 		    position: new google.maps.LatLng(dog_locations[i].address.latitude, dog_locations[i].address.longitude),
 		    map: map,
-		    title: 'Dog!'
+		    title: dog_locations[i].name
 		});
+
+		google.maps.event.addListener(marker, 'click', (function(marker, i) {
+			return function() {	
+				map.setZoom(8);
+				map.setCenter(marker.getPosition());
+				var infowindow = new google.maps.InfoWindow({
+					content: '<a href="' + "/users/" + dog_locations[i].user_id + '">' + dog_locations[i].name + '</a><br>' +
+								dog_locations[i].address.street
+				});
+				infowindow.open(map, marker)
+			}
+		})(marker, i));
 	}
 });
