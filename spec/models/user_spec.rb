@@ -184,8 +184,8 @@ describe User do
 
   describe "address associations" do
     before { @user.save }
-    let!(:old_address) { FactoryGirl.create(:address, user: @user, created_at: 1.day.ago) }
-    let!(:new_address) { FactoryGirl.create(:address, user: @user, created_at: 1.hour.ago) }
+    let!(:old_address) { FactoryGirl.create(:address, user: @user, updated_at: 1.day.ago) }
+    let!(:new_address) { FactoryGirl.create(:address, user: @user, updated_at: 1.hour.ago) }
 
     it "should have the right addresses in the right order" do
       @user.addresses.should == [new_address, old_address]

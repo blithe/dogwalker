@@ -12,7 +12,7 @@ guard 'spork', :rspec_env => { 'RAILS_ENV' => 'test' } do
   watch('spec/support/') 
 end
 
-guard 'rspec', :version => 2, :all_on_start => false, :all_after_pass => false, :cli => '--drb' do
+guard 'rspec', :version => 2, :all_after_pass => false, :cli => '--drb' do
 
   watch(%r{^app/controllers/(.+)_(controller)\.rb$}) do |m|
     ["spec/routing/#{m[1]}_routing_spec.rb",
