@@ -6,8 +6,17 @@ class UserMailer < ActionMailer::Base
   	mail(:to => "#{user.name} <#{user.email}>", :subject => "Created account!")
   end
 
-  def scheduled_walk_confirmation()
+  def walk_scheduled_confirmation(user, walktime, dog)
   	@user = user
+  	@dog = dog
+  	@walktime = walktime
   	mail(:to => "#{user.name} <#{user.email}>", :subject => "Scheduled walk!")
+  end
+
+  def walk_unscheduled_confirmation(user, walktime, dog)
+  	@user = user
+  	@dog = dog
+  	@walktime = walktime
+  	mail(:to => "#{user.name} <#{user.email}>", :subject => "Cancelled walk!")
   end
 end
